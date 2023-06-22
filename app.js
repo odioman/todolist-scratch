@@ -15,6 +15,8 @@ class CreateToDoList {
     removeTask(task) {
         this.todo = this.todo.filter((word) => word !== task);
         this.render.renderList(this.todo);
+
+        //not working
         let tasks = Array.from(JSON.parse(localStorage.getItem("todo")));
         tasks.forEach(task => {
             if (task.task === event.parentNode.children[1].value) {
@@ -29,7 +31,7 @@ class CreateToDoList {
         if (localStorage.getItem('todo') == null) {
             return
         }
-
+        //get task from local storage not working
         this.todo = Array.from(JSON.parse(localStorage.getItem('todo')));
     }
 
