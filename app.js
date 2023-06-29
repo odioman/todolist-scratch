@@ -54,7 +54,7 @@ function editItem(event) {
     let itemInput = document.createElement('input');
     itemInput.type = 'text';
     itemInput.value = item;
-    itemInput.classList.add('edit')
+    itemInput.classList.add('todoList')
     itemInput.addEventListener('keypress',saveItem);
     itemInput.addEventListener('click', saveItem);
     event.target.parentNode.prepend(itemInput);
@@ -64,7 +64,7 @@ function editItem(event) {
 
 function saveItem(event) {
     let inputValue = event.target.value;
-    if (event.target.value.length > 0 && (event.keyCode === 13 || event.type === 'click')) {
+    if (inputValue.length > 0 && (event.keyCode === 13 || event.type === 'click')) {
         let li = document.createElement('li');
         li.addEventListener('click', editItem);
         li.textContent = event.target.value;
