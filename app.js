@@ -20,14 +20,14 @@ function newElement() {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     li.appendChild(checkbox);
-    const span = document.createElement("span");
-    span.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
-    span.className = 'close';
-    li.appendChild(span);
-    const span2 = document.createElement("span");
-    span2.innerHTML = '<i class="fa-solid fa-pen"></i>';
-    span.className = 'edit';
-    li.appendChild(span2);
+    const deleteBtn = document.createElement("span");
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+    deleteBtn.className = 'delete';
+    li.appendChild(deleteBtn);
+    const editBtn = document.createElement("span");
+    editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
+    editBtn.className = 'edit';
+    li.appendChild(editBtn);
 
 
     //add a check mark when clicking on checkbox, styling changes with strikethrough and background color change;
@@ -41,12 +41,12 @@ function newElement() {
         }
     });
 
-    span.addEventListener('click', function(){
+    deleteBtn.addEventListener('click', function(){
         const div = this.parentElement;
         div.style.display = 'none';
     })
 
-    span2.addEventListener('click', editItem)
+    editBtn.addEventListener('click', editItem)
 }
 
 function editItem(event) {
