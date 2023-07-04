@@ -51,24 +51,37 @@ function newElement() {
 
 function editItem(event) {
     let item = event.target.innerHTML;
+    let li = document.querySelector('li')
     let itemInput = document.createElement('input');
     itemInput.type = 'text';
-    itemInput.value = item;
+    itemInput.value = li.textContent;
+    li.style.display = 'hidden'
     itemInput.classList.add('todoList')
     itemInput.addEventListener('keypress',saveItem);
     itemInput.addEventListener('click', saveItem);
-    event.target.parentNode.prepend(itemInput);
+    event.target.parentNode.parentNode.prepend(itemInput);
     event.target.remove();
     itemInput.select();
 }
 
 function saveItem(event) {
     let inputValue = event.target.value;
-    if (inputValue.length > 0 && (event.keyCode === 13 || event.type === 'click')) {
+    if (inputValue.length > 0 && (event.keyCode === 13)) {
         let li = document.createElement('li');
         li.addEventListener('click', editItem);
         li.textContent = event.target.value;
         event.target.parentNode.prepend(li);
         event.target.remove()
     }
-}
+} 
+
+/* function saveItem(event) {
+    let inputValue = event.target.value;
+    if (inputValue.length > 0 && (event.keyCode === 13 || event.type === 'click')) {
+        const li = document.querySelector('li');
+        li.addEventListener('click', editItem);
+        inputValue.textContent = li.textContent;
+        event.target.parentNode.prepend(li);
+        event.target.remove()
+    }
+} */ 
