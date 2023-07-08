@@ -1,5 +1,114 @@
-ul li:checked {
-    background: #888;
-    color: #fff;
-    text-decoration: line-through
-}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background-color: #A0CFD3;
+    color: white;
+    min-height: 100vh;
+  }
+  
+  header {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .container {
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .input,
+  .addBtn {
+    padding: 0.5rem;
+    font-size: 2rem;
+    border: none;
+    background: white;
+  }
+  
+.addBtn {
+    color: black;
+    background: grey;
+    cursor: pointer;
+    transition-delay: all 0.3s ease;
+  }
+  
+  .addBtn:hover {
+    background: black;
+    color: white;
+  }
+  
+  .container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    border: 1px solid black;
+    width: min-content;
+    max-width: calc(100% - 30px);
+    min-height: 50vh;
+    background-color: grey;
+  }
+  
+  .todoList {
+    min-width: 400px;
+    list-style: none;
+    padding: 10px;
+    margin: 10px auto;
+  }
+  
+  .todoItem {
+    margin: 0.5rem;
+    background: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    transition: all 0.5s ease;
+    width: 90%
+  }
+  
+  .todo {
+    height: 2.25rem;
+    width: 20rem;
+  }
+  
+  .deleteBtn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .completedBtn {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .editBtn {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+ /* .fa-trash,
+  .fa-check {
+    pointer-events: none;
+  } */
+  
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }

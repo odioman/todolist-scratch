@@ -1,87 +1,74 @@
-const input = document.querySelector('.input')
-const ul = document.querySelector('.todoList')
+const input = document.querySelector('.input');
+const addBtn = document.querySelector('.addBtn');
+const todoList = document.querySelector('.todoList');
 
+function createTodo(e) {
+    e.preventDefault();
+    const item = document.createElement('li');
+    item.classList.add('todoItem');
 
+    const task = document.createElement('input');
+    task.setAttribute('readonly', true);
+    task.value = input.value;
+    task.classList.add('todo');
+    item.append(task);
 
+    const completedBtn = document.createElement('input');
+    completedBtn.type = 'checkbox';
+    completedBtn.classList.add('completedBtn');
+    item.appendChild(completedBtn);
 
-//create a new li to append to todoList
-function newElement() {
-    const li = document.createElement('li');
-    const inputValue = input.value;
-    const textNode = document.createTextNode(inputValue);
-    li.appendChild(textNode);
-    if (inputValue === '') {
-        return
-    } else {
-        ul.appendChild(li)
-        input.value= '';
-    }
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+    deleteBtn.classList.add('deleteBtn');
+    deleteBtn.type = 'button';
+    item.appendChild(deleteBtn);
 
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    li.appendChild(checkbox);
-    const deleteBtn = document.createElement("span");
-    deleteBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
-    deleteBtn.className = 'delete';
-    li.appendChild(deleteBtn);
-    const editBtn = document.createElement("span");
+    const editBtn = document.createElement('button');
     editBtn.innerHTML = '<i class="fa-solid fa-pen"></i>';
-    editBtn.className = 'edit';
-    li.appendChild(editBtn);
+    editBtn.classList.add('editBtn');
+    editBtn.type = 'button';
+    item.appendChild(editBtn);
 
-
-    //add a check mark when clicking on checkbox, styling changes with strikethrough and background color change;
-    checkbox.addEventListener('click', function() {
-        if (this.checked) {
-           li.style.textDecoration = 'line-through';
-           li.style.background = '#888';
-           li.style.color = '#fff';
-        } else {
-            li.style = 'auto';
-        }
-    });
-
-    deleteBtn.addEventListener('click', function(){
-        const div = this.parentElement;
-        div.style.display = 'none';
-    })
-
-    editBtn.addEventListener('click', editItem)
+    todoList.appendChild(item);
+    input.value = '';
 }
 
-function editItem(event) {
-    let item = event.target.innerHTML;
-    let li = document.querySelector('li')
-    let itemInput = document.createElement('input');
-    itemInput.type = 'text';
-    itemInput.value = li.textContent;
-    li.style.display = 'hidden'
-    itemInput.classList.add('todoList')
-    itemInput.addEventListener('keypress',saveItem);
-    itemInput.addEventListener('click', saveItem);
-    event.target.parentNode.parentNode.prepend(itemInput);
-    event.target.remove();
-    itemInput.select();
+function deleteTodo(e) {
+    const item = e.target;
+    if (item.classList[0] === 'deleteBtn') {
+        const todo = item.parentElement;
+        todo.remove()
+    }
 }
 
-function saveItem(event) {
-    let inputValue = event.target.value;
-    if (inputValue.length > 0 && (event.keyCode === 13)) {
-        let li = document.createElement('li');
-        li.addEventListener('click', editItem);
-        li.textContent = event.target.value;
-        event.target.parentNode.prepend(li);
-        event.target.remove()
+function completeTodo(e) {
+    const item = e.target;
+    if (item.classList[0] === 'completedBtn') {
+        const todo = item.parentElement;
+        todo.classList.toggle('completed');
     }
-} 
+}
 
-/* function saveItem(event) {
-    let inputValue = event.target.value;
-    if (inputValue.length > 0 && (event.keyCode === 13 || event.type === 'click')) {
-        const li = document.querySelector('li');
-        li.addEventListener('click', editItem);
-        inputValue.textContent = li.textContent;
-        event.target.parentNode.prepend(li);
-        event.target.remove()
+function editTodo(e) {
+    const item = e.target;
+    if (item.classList[0] === 'editBtn') {
+        const todo = item.parentElement;
+        item.classList.toggle('editMode');
+        todo.firstElementChild.toggleAttribute('readonly');
     }
-} */ 
+}
+
+addBtn.addEventListener('click', createTodo);
+todoList.addEventListener('click', deleteTodo);
+todoList.addEventListener('click', completeTodo);
+todoList.addEventListener('click', editTodo);
+
+
+
+
+
+
+
+
+
